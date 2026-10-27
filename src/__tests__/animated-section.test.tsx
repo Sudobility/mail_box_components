@@ -9,11 +9,15 @@ import {
 
 // Mock IntersectionObserver
 const mockIntersectionObserver = vi.fn();
-mockIntersectionObserver.mockReturnValue({
-  observe: vi.fn(),
-  unobserve: vi.fn(),
-  disconnect: vi.fn(),
-});
+// Vitest 4: a mock invoked with `new` must be given a class implementation
+// (not mockReturnValue, nor an arrow function).
+mockIntersectionObserver.mockImplementation(
+  class {
+    observe = vi.fn();
+    unobserve = vi.fn();
+    disconnect = vi.fn();
+  }
+);
 
 beforeEach(() => {
   vi.clearAllMocks();

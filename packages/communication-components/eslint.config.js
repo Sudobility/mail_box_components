@@ -18,6 +18,13 @@ export default [
         sourceType: 'module',
       },
       globals: {
+        __dirname: "readonly",
+        __filename: "readonly",
+        require: "readonly",
+        module: "readonly",
+        exports: "writable",
+        global: "readonly",
+        Buffer: "readonly",
         console: 'readonly',
         process: 'readonly',
         window: 'readonly',
