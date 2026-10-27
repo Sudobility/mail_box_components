@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/components",
-  "version": "5.3.45",
+  "version": "5.3.46",
   "description": "Reusable UI components and design system - Reorganized for better maintainability",
   "type": "module",
   "main": "dist/index.js",
