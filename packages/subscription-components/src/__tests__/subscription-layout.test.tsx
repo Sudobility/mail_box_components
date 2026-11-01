@@ -75,7 +75,9 @@ describe('SubscriptionLayout', () => {
   it('renders with basic props', () => {
     render(<SubscriptionLayout {...defaultProps} />);
 
-    expect(screen.getByText('Choose Your Plan')).toBeInTheDocument();
+    // The `title` prop is accepted for API compatibility but is no longer
+    // rendered as a heading (the subscription surface shows no title).
+    expect(screen.queryByText('Choose Your Plan')).not.toBeInTheDocument();
     expect(screen.getByText('Subscribe Now')).toBeInTheDocument();
     expect(screen.getByTestId('child-content')).toBeInTheDocument();
   });

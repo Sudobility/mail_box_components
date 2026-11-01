@@ -155,7 +155,8 @@ export interface SubscriptionLayoutProps {
  * ```
  */
 export const SubscriptionLayout: React.FC<SubscriptionLayoutProps> = ({
-  title,
+  // `title` is still accepted for API compatibility but no longer rendered as a
+  // heading — the subscription surface shows no title above the controls.
   children,
   error,
   variant = 'selection',
@@ -194,113 +195,119 @@ export const SubscriptionLayout: React.FC<SubscriptionLayoutProps> = ({
   };
 
   return (
-    <div className={className}>
+    <div className={cn('flex flex-col min-h-0', className)}>
       {/* Custom Header Content */}
       {headerContent}
 
-      {/* Current Status Section */}
-      {currentStatus && (
-        <>
-          <h2 className={cn(textVariants.heading.h3(), 'mb-4')}>
-            {currentStatusLabel}
-          </h2>
-
-          {currentStatus.isActive ? (
-            <div className='bg-card/30 border border-border rounded-lg p-4 mb-6'>
-              <div className='flex items-center mb-2'>
-                <div className='w-3 h-3 bg-success rounded-full mr-3' />
-                <span className='font-semibold text-foreground'>
-                  {currentStatus.activeContent?.title || 'Active Subscription'}
-                </span>
-              </div>
-              {currentStatus.activeContent?.fields &&
-                currentStatus.activeContent.fields.length > 0 && (
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
-                    {currentStatus.activeContent.fields.map((field, index) => (
-                      <div key={index}>
-                        <p className='text-sm text-muted-foreground'>
-                          {field.label}
-                        </p>
-                        <p className='font-semibold text-muted-foreground'>
-                          {field.value}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              {currentStatus.activeContent?.platform && (
-                <div className='mt-4'>
-                  <p className='text-sm text-muted-foreground'>
-                    {currentStatus.activeContent.platform.label}
-                  </p>
-                  <div className='flex items-center gap-1.5 mt-0.5'>
-                    <PlatformIcon
-                      platform={currentStatus.activeContent.platform.value}
-                      size={16}
-                      className='text-muted-foreground'
-                    />
-                    <p className='font-semibold text-muted-foreground'>
-                      {platformDisplayName(
-                        currentStatus.activeContent.platform.value
-                      )}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className='bg-warning/10 border border-warning/20 rounded-lg p-4 mb-6'>
-              <div className='flex items-center mb-2'>
-                <div className='w-3 h-3 bg-warning rounded-full mr-3' />
-                <span className='font-semibold text-warning'>
-                  {currentStatus.inactiveContent?.title ||
-                    'No Active Subscription'}
-                </span>
-              </div>
-              {currentStatus.inactiveContent?.message && (
-                <p className='text-warning'>
-                  {currentStatus.inactiveContent.message}
-                </p>
-              )}
-            </div>
-          )}
-        </>
-      )}
-
-      {/* Section Title */}
-      <h2 className={cn(textVariants.heading.h3(), 'mb-4')}>{title}</h2>
-
-      {/* Above Products Content (e.g., billing period selector) */}
+      {/* Segmented control: stays fixed at the top; the content below scrolls. */}
       {aboveProducts}
 
-      {/* Subscription Tiles Grid */}
-      <div style={gridStyle}>
-        {/* Free Tile - only shown in 'cta' variant when enabled */}
-        {shouldShowFreeTile && (
-          <SubscriptionTile
-            id='free'
-            title={freeTileConfig.title}
-            price={freeTileConfig.price}
-            periodLabel={freeTileConfig.periodLabel}
-            features={freeTileConfig.features}
-            isSelected={false}
-            onSelect={() => {}}
-            topBadge={freeTileConfig.topBadge}
-            ctaButton={freeTileConfig.ctaButton}
-          />
+      {/* Scrollable region — the subscription surface owns its own scroll, so
+          the detail pane around it does not need to scroll. `pt-4` leaves room
+          for a tile's top badge (e.g. "Current"), which overflows the tile's
+          top edge and would otherwise be clipped by the scroll container. */}
+      <div className='flex-1 min-h-0 overflow-y-auto pt-4'>
+        {/* Current Status Section */}
+        {currentStatus && (
+          <>
+            <h2 className={cn(textVariants.heading.h3(), 'mb-4')}>
+              {currentStatusLabel}
+            </h2>
+
+            {currentStatus.isActive ? (
+              <div className='bg-card/30 border border-border rounded-lg p-4 mb-6'>
+                <div className='flex items-center mb-2'>
+                  <div className='w-3 h-3 bg-success rounded-full mr-3' />
+                  <span className='font-semibold text-foreground'>
+                    {currentStatus.activeContent?.title ||
+                      'Active Subscription'}
+                  </span>
+                </div>
+                {currentStatus.activeContent?.fields &&
+                  currentStatus.activeContent.fields.length > 0 && (
+                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4'>
+                      {currentStatus.activeContent.fields.map(
+                        (field, index) => (
+                          <div key={index}>
+                            <p className='text-sm text-muted-foreground'>
+                              {field.label}
+                            </p>
+                            <p className='font-semibold text-muted-foreground'>
+                              {field.value}
+                            </p>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  )}
+                {currentStatus.activeContent?.platform && (
+                  <div className='mt-4'>
+                    <p className='text-sm text-muted-foreground'>
+                      {currentStatus.activeContent.platform.label}
+                    </p>
+                    <div className='flex items-center gap-1.5 mt-0.5'>
+                      <PlatformIcon
+                        platform={currentStatus.activeContent.platform.value}
+                        size={16}
+                        className='text-muted-foreground'
+                      />
+                      <p className='font-semibold text-muted-foreground'>
+                        {platformDisplayName(
+                          currentStatus.activeContent.platform.value
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className='bg-warning/10 border border-warning/20 rounded-lg p-4 mb-6'>
+                <div className='flex items-center mb-2'>
+                  <div className='w-3 h-3 bg-warning rounded-full mr-3' />
+                  <span className='font-semibold text-warning'>
+                    {currentStatus.inactiveContent?.title ||
+                      'No Active Subscription'}
+                  </span>
+                </div>
+                {currentStatus.inactiveContent?.message && (
+                  <p className='text-warning'>
+                    {currentStatus.inactiveContent.message}
+                  </p>
+                )}
+              </div>
+            )}
+          </>
         )}
-        {children}
-      </div>
 
-      {/* Custom Footer Content */}
-      {footerContent}
-
-      {/* Error Message */}
-      {error && (
-        <div className='bg-destructive/10 border border-destructive/20 rounded-lg p-4 mt-6'>
-          <p className='text-destructive'>{error}</p>
+        {/* Subscription Tiles Grid (features + options) */}
+        <div style={gridStyle}>
+          {/* Free Tile - only shown in 'cta' variant when enabled */}
+          {shouldShowFreeTile && (
+            <SubscriptionTile
+              id='free'
+              title={freeTileConfig.title}
+              price={freeTileConfig.price}
+              periodLabel={freeTileConfig.periodLabel}
+              features={freeTileConfig.features}
+              isSelected={false}
+              onSelect={() => {}}
+              topBadge={freeTileConfig.topBadge}
+              ctaButton={freeTileConfig.ctaButton}
+            />
+          )}
+          {children}
         </div>
-      )}
+
+        {/* Custom Footer Content */}
+        {footerContent}
+
+        {/* Error Message */}
+        {error && (
+          <div className='bg-destructive/10 border border-destructive/20 rounded-lg p-4 mt-6'>
+            <p className='text-destructive'>{error}</p>
+          </div>
+        )}
+      </div>
 
       {/* Action Buttons - only shown in 'selection' variant */}
       {showActionButtons && (
