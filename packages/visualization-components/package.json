@@ -25,15 +25,15 @@
     "test:watch": "vitest"
   },
   "peerDependencies": {
-    "@sudobility/components": "^5.3.33",
-    "@sudobility/design": "^1.1.58",
+    "@sudobility/components": "^5.3.48",
+    "@sudobility/design": "^1.1.66",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@sudobility/components": "^5.3.33",
-    "@sudobility/design": "^1.1.58",
+    "@sudobility/components": "^5.3.48",
+    "@sudobility/design": "^1.1.66",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^24.7.1",
@@ -53,7 +53,7 @@
     "jsdom": "^27.0.1",
     "prettier": "~3.9.10",
     "tailwind-merge": "^3.3.1",
-    "typescript": "^5.9.3",
+    "typescript": "~6.0.3",
     "vite": "^7.1.12",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.4"
