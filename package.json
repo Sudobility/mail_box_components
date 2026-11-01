@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/components",
-  "version": "5.3.49",
+  "version": "5.3.50",
   "description": "Reusable UI components and design system - Reorganized for better maintainability",
   "type": "module",
   "main": "dist/index.js",
@@ -10,6 +10,198 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./agriculture": {
+      "types": "./dist/agriculture.d.ts",
+      "import": "./dist/agriculture.js"
+    },
+    "./analytics": {
+      "types": "./dist/analytics.d.ts",
+      "import": "./dist/analytics.js"
+    },
+    "./auth": {
+      "types": "./dist/auth.d.ts",
+      "import": "./dist/auth.js"
+    },
+    "./automotive": {
+      "types": "./dist/automotive.d.ts",
+      "import": "./dist/automotive.js"
+    },
+    "./collaboration": {
+      "types": "./dist/collaboration.d.ts",
+      "import": "./dist/collaboration.js"
+    },
+    "./communication": {
+      "types": "./dist/communication.d.ts",
+      "import": "./dist/communication.js"
+    },
+    "./construction": {
+      "types": "./dist/construction.d.ts",
+      "import": "./dist/construction.js"
+    },
+    "./design": {
+      "types": "./dist/design.d.ts",
+      "import": "./dist/design.js"
+    },
+    "./devops": {
+      "types": "./dist/devops.d.ts",
+      "import": "./dist/devops.js"
+    },
+    "./documents": {
+      "types": "./dist/documents.d.ts",
+      "import": "./dist/documents.js"
+    },
+    "./ecommerce": {
+      "types": "./dist/ecommerce.d.ts",
+      "import": "./dist/ecommerce.js"
+    },
+    "./education": {
+      "types": "./dist/education.d.ts",
+      "import": "./dist/education.js"
+    },
+    "./email": {
+      "types": "./dist/email.d.ts",
+      "import": "./dist/email.js"
+    },
+    "./energy": {
+      "types": "./dist/energy.d.ts",
+      "import": "./dist/energy.js"
+    },
+    "./entertainment": {
+      "types": "./dist/entertainment.d.ts",
+      "import": "./dist/entertainment.js"
+    },
+    "./entity": {
+      "types": "./dist/entity.d.ts",
+      "import": "./dist/entity.js"
+    },
+    "./events": {
+      "types": "./dist/events.d.ts",
+      "import": "./dist/events.js"
+    },
+    "./finance": {
+      "types": "./dist/finance.d.ts",
+      "import": "./dist/finance.js"
+    },
+    "./fitness": {
+      "types": "./dist/fitness.d.ts",
+      "import": "./dist/fitness.js"
+    },
+    "./food": {
+      "types": "./dist/food.d.ts",
+      "import": "./dist/food.js"
+    },
+    "./gaming": {
+      "types": "./dist/gaming.d.ts",
+      "import": "./dist/gaming.js"
+    },
+    "./government": {
+      "types": "./dist/government.d.ts",
+      "import": "./dist/government.js"
+    },
+    "./healthcare": {
+      "types": "./dist/healthcare.d.ts",
+      "import": "./dist/healthcare.js"
+    },
+    "./hr": {
+      "types": "./dist/hr.d.ts",
+      "import": "./dist/hr.js"
+    },
+    "./insurance": {
+      "types": "./dist/insurance.d.ts",
+      "import": "./dist/insurance.js"
+    },
+    "./interaction": {
+      "types": "./dist/interaction.d.ts",
+      "import": "./dist/interaction.js"
+    },
+    "./iot": {
+      "types": "./dist/iot.d.ts",
+      "import": "./dist/iot.js"
+    },
+    "./legal": {
+      "types": "./dist/legal.d.ts",
+      "import": "./dist/legal.js"
+    },
+    "./logistics": {
+      "types": "./dist/logistics.d.ts",
+      "import": "./dist/logistics.js"
+    },
+    "./manufacturing": {
+      "types": "./dist/manufacturing.d.ts",
+      "import": "./dist/manufacturing.js"
+    },
+    "./marketing": {
+      "types": "./dist/marketing.d.ts",
+      "import": "./dist/marketing.js"
+    },
+    "./media-components": {
+      "types": "./dist/media-components.d.ts",
+      "import": "./dist/media-components.js"
+    },
+    "./monitoring": {
+      "types": "./dist/monitoring.d.ts",
+      "import": "./dist/monitoring.js"
+    },
+    "./nonprofit": {
+      "types": "./dist/nonprofit.d.ts",
+      "import": "./dist/nonprofit.js"
+    },
+    "./project-management": {
+      "types": "./dist/project-management.d.ts",
+      "import": "./dist/project-management.js"
+    },
+    "./ratelimit": {
+      "types": "./dist/ratelimit.d.ts",
+      "import": "./dist/ratelimit.js"
+    },
+    "./realestate": {
+      "types": "./dist/realestate.d.ts",
+      "import": "./dist/realestate.js"
+    },
+    "./retail": {
+      "types": "./dist/retail.d.ts",
+      "import": "./dist/retail.js"
+    },
+    "./scheduling": {
+      "types": "./dist/scheduling.d.ts",
+      "import": "./dist/scheduling.js"
+    },
+    "./scientific": {
+      "types": "./dist/scientific.d.ts",
+      "import": "./dist/scientific.js"
+    },
+    "./search": {
+      "types": "./dist/search.d.ts",
+      "import": "./dist/search.js"
+    },
+    "./security": {
+      "types": "./dist/security.d.ts",
+      "import": "./dist/security.js"
+    },
+    "./social": {
+      "types": "./dist/social.d.ts",
+      "import": "./dist/social.js"
+    },
+    "./subscription": {
+      "types": "./dist/subscription.d.ts",
+      "import": "./dist/subscription.js"
+    },
+    "./travel": {
+      "types": "./dist/travel.d.ts",
+      "import": "./dist/travel.js"
+    },
+    "./visualization": {
+      "types": "./dist/visualization.d.ts",
+      "import": "./dist/visualization.js"
+    },
+    "./web3": {
+      "types": "./dist/web3.d.ts",
+      "import": "./dist/web3.js"
+    },
+    "./workflow": {
+      "types": "./dist/workflow.d.ts",
+      "import": "./dist/workflow.js"
+    },
     "./ui/toast": {
       "types": "./dist/ui/toast/index.d.ts",
       "import": "./dist/index.js"
@@ -17,7 +209,8 @@
     "./*": {
       "types": "./dist/*.d.ts",
       "import": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -63,7 +256,12 @@
     "react-i18next": ">=14.0.0",
     "react-router-dom": ">=6.0.0",
     "tailwind-merge": ">=2.0.0",
-    "web-vitals": ">=3.0.0"
+    "web-vitals": ">=3.0.0",
+    "firebase": "^12.0.0",
+    "@sudobility/di": "^1.5.82",
+    "recharts": "^3.0.0",
+    "@sudobility/subscription_lib": "^0.0.59",
+    "@revenuecat/purchases-js": "^1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "~10.0.1",
@@ -112,7 +310,12 @@
     "vite": "~8.3.5",
     "vite-plugin-dts": "~4.5.4",
     "vitest": "~4.1.12",
-    "web-vitals": "~6.1.1"
+    "web-vitals": "~6.1.1",
+    "firebase": "^12.0.0",
+    "@sudobility/di": "^1.5.82",
+    "recharts": "^3.0.0",
+    "@sudobility/subscription_lib": "^0.0.59",
+    "@revenuecat/purchases-js": "^1.0.0"
   },
   "repository": {
     "type": "git",
@@ -129,5 +332,22 @@
   "publishConfig": {
     "access": "public"
   },
-  "license": "BUSL-1.1"
+  "license": "BUSL-1.1",
+  "peerDependenciesMeta": {
+    "firebase": {
+      "optional": true
+    },
+    "@sudobility/di": {
+      "optional": true
+    },
+    "recharts": {
+      "optional": true
+    },
+    "@sudobility/subscription_lib": {
+      "optional": true
+    },
+    "@revenuecat/purchases-js": {
+      "optional": true
+    }
+  }
 }

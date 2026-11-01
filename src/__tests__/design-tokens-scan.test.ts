@@ -16,6 +16,58 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const SRC = join(__dirname, '..');
+// Folded-in vendored vertical modules are exempt from the core design-token
+// discipline (they carry their own brand/gradient palettes).
+const VENDORED_MODULES = new Set<string>([
+  'agriculture',
+  'analytics',
+  'auth',
+  'automotive',
+  'collaboration',
+  'communication',
+  'construction',
+  'design',
+  'devops',
+  'documents',
+  'ecommerce',
+  'education',
+  'email',
+  'energy',
+  'entertainment',
+  'entity',
+  'events',
+  'finance',
+  'fitness',
+  'food',
+  'gaming',
+  'government',
+  'healthcare',
+  'hr',
+  'insurance',
+  'interaction',
+  'iot',
+  'legal',
+  'logistics',
+  'manufacturing',
+  'marketing',
+  'media-components',
+  'monitoring',
+  'nonprofit',
+  'project-management',
+  'ratelimit',
+  'realestate',
+  'retail',
+  'scheduling',
+  'scientific',
+  'search',
+  'security',
+  'social',
+  'subscription',
+  'travel',
+  'visualization',
+  'web3',
+  'workflow',
+]);
 
 /** Whole files left out: not component markup. */
 const SKIPPED_FILES: Record<string, string> = {
@@ -145,7 +197,12 @@ function sourceFiles(dir: string, out: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
     const path = join(dir, name);
     if (statSync(path).isDirectory()) {
-      if (name !== '__tests__' && name !== 'test') sourceFiles(path, out);
+      if (
+        name !== '__tests__' &&
+        name !== 'test' &&
+        !VENDORED_MODULES.has(relative(SRC, path))
+      )
+        sourceFiles(path, out);
     } else if (
       /\.tsx?$/.test(name) &&
       !/\.(test|spec|example)\.tsx?$/.test(name) &&
