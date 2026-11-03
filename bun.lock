@@ -15,7 +15,7 @@
         "@radix-ui/react-switch": "~1.4.1",
         "@radix-ui/react-tabs": "~1.2.1",
         "@revenuecat/purchases-js": "^1.0.0",
-        "@sudobility/design": "^1.1.68",
+        "@sudobility/design": "^1.1.69",
         "@sudobility/di": "^1.5.85",
         "@sudobility/subscription_lib": "^0.0.64",
         "@sudobility/types": "^1.9.78",
@@ -72,7 +72,7 @@
         "@radix-ui/react-switch": ">=1.0.0",
         "@radix-ui/react-tabs": ">=1.0.0",
         "@revenuecat/purchases-js": "^1.0.0",
-        "@sudobility/design": "^1.1.68",
+        "@sudobility/design": "^1.1.69",
         "@sudobility/di": "^1.5.85",
         "@sudobility/subscription_lib": "^0.0.64",
         "@sudobility/types": "^1.9.78",
@@ -492,7 +492,7 @@
 
     "@standard-schema/utils": ["@standard-schema/utils@0.3.0", "", {}, "sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g=="],
 
-    "@sudobility/design": ["@sudobility/design@1.1.68", "https://npm.pkg.github.com/download/@sudobility/design/1.1.68/289478a5caaadcbf38fa9fdec554edde15b3d9d2", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-AT56VZlPkJSgiNSC4Shl1MOXSX2aKJ/rhDsTOsV+l7TGmlHKMH8D+8epE/at2qO9+LZaPNEEm3lANBehZej64A=="],
+    "@sudobility/design": ["@sudobility/design@1.1.69", "https://npm.pkg.github.com/download/@sudobility/design/1.1.69/8dc2caf34fda3cd4ccdf67a6e9aecfa40f013fcd", { "peerDependencies": { "clsx": ">=2.0.0", "tailwind-merge": ">=2.0.0" } }, "sha512-MUW9bSwis7thR9GBhqtil6RzgTZVPymqy4GAqFGDBUX7o1FcfmlhnDWcc4acR2Hf3OqkxHGm9gFuMW83/ufuiA=="],
 
     "@sudobility/di": ["@sudobility/di@1.5.85", "https://npm.pkg.github.com/download/@sudobility/di/1.5.85/5914303c5376ee0a158b08bdff2955fe3392b4c0", { "peerDependencies": { "@notifee/react-native": ">=7.0.0", "@react-native-async-storage/async-storage": ">=1.19.0", "@react-native-community/netinfo": ">=9.0.0", "@react-native-firebase/analytics": ">=18.0.0", "@react-native-firebase/app": ">=18.0.0", "@react-native-firebase/messaging": ">=18.0.0", "@sudobility/types": "^1.9.78", "firebase": ">=11.0.0", "react": ">=18.0.0", "react-native": ">=0.70.0" } }, "sha512-SsRL5t8G2/Kck8bnZUz1H1XIKFDBeM3dK1w0UoaBZqHnxTHrSbVectxQYgF6zskzlPeA6GlKHYd8tB7YB0MFxA=="],
 
