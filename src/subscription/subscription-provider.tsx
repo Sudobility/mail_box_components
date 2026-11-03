@@ -19,11 +19,13 @@ import type {
 import {
   isSubscriptionInitialized,
   getSubscriptionInstance,
-  setSubscriptionUserId,
   refreshSubscription,
   restoreSubscription,
   onSubscriptionRefresh,
 } from '@sudobility/subscription_lib';
+// The current user is set through di's UserProvider (the fleet's current-user
+// seam); subscription_lib syncs it to the store adapter.
+import { setCurrentUser } from '@sudobility/di';
 import type {
   SubscriptionOffer,
   CurrentSubscription,
@@ -125,12 +127,12 @@ export const SubscriptionProvider: React.FC<SubscriptionProviderProps> = ({
   }, [syncState]);
 
   const initialize = useCallback(
-    async (userId?: string, email?: string) => {
+    async (userId?: string, _email?: string) => {
       try {
         setIsLoading(true);
         setError(null);
 
-        await setSubscriptionUserId(userId, email);
+        setCurrentUser({ userId, isLoggedIn: !!userId });
 
         if (isSubscriptionInitialized()) {
           const service = getSubscriptionInstance();

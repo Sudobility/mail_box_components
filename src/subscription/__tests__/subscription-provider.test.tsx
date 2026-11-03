@@ -11,7 +11,6 @@ import {
 vi.mock('@sudobility/subscription_lib', () => ({
   isSubscriptionInitialized: vi.fn(() => false),
   getSubscriptionInstance: vi.fn(),
-  setSubscriptionUserId: vi.fn(),
   refreshSubscription: vi.fn(),
   restoreSubscription: vi.fn(),
   onSubscriptionRefresh: vi.fn(() => vi.fn()),
