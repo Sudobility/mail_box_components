@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/components",
-  "version": "5.3.59",
+  "version": "5.3.60",
   "description": "Reusable UI components and design system - Reorganized for better maintainability",
   "type": "module",
   "main": "dist/index.js",
@@ -17,10 +17,6 @@
     "./analytics": {
       "types": "./dist/analytics.d.ts",
       "import": "./dist/analytics.js"
-    },
-    "./auth": {
-      "types": "./dist/auth.d.ts",
-      "import": "./dist/auth.js"
     },
     "./automotive": {
       "types": "./dist/automotive.d.ts",
