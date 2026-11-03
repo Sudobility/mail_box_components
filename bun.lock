@@ -17,7 +17,7 @@
         "@revenuecat/purchases-js": "^1.0.0",
         "@sudobility/design": "^1.1.68",
         "@sudobility/di": "^1.5.84",
-        "@sudobility/subscription_lib": "^0.0.61",
+        "@sudobility/subscription_lib": "^0.0.62",
         "@sudobility/types": "^1.9.78",
         "@testing-library/dom": "~10.4.2",
         "@testing-library/jest-dom": "~7.0.1",
@@ -74,7 +74,7 @@
         "@revenuecat/purchases-js": "^1.0.0",
         "@sudobility/design": "^1.1.68",
         "@sudobility/di": "^1.5.84",
-        "@sudobility/subscription_lib": "^0.0.61",
+        "@sudobility/subscription_lib": "^0.0.62",
         "@sudobility/types": "^1.9.78",
         "class-variance-authority": ">=0.7.0",
         "clsx": ">=2.0.0",
@@ -496,7 +496,7 @@
 
     "@sudobility/di": ["@sudobility/di@1.5.84", "https://npm.pkg.github.com/download/@sudobility/di/1.5.84/346e2e528531ab5f52ff6cc60f12de20dd921d06", { "peerDependencies": { "@notifee/react-native": ">=7.0.0", "@react-native-async-storage/async-storage": ">=1.19.0", "@react-native-community/netinfo": ">=9.0.0", "@react-native-firebase/analytics": ">=18.0.0", "@react-native-firebase/app": ">=18.0.0", "@react-native-firebase/messaging": ">=18.0.0", "@sudobility/types": "^1.9.78", "firebase": ">=11.0.0", "react": ">=18.0.0", "react-native": ">=0.70.0" } }, "sha512-98W1JuNJAUyQH5DuvL9R7uumjifS/+K8NW5YV2Ob2mi7r/8P9ccGyFjAI54jV6E9cX4V5FCm5eXDY+D9NjcT7g=="],
 
-    "@sudobility/subscription_lib": ["@sudobility/subscription_lib@0.0.61", "https://npm.pkg.github.com/download/@sudobility/subscription_lib/0.0.61/cbf464cba3dbdfdbd6f1f93d86c0b765b07f4805", { "peerDependencies": { "@sudobility/types": "^1.9.78", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-Q+k8lmG69Hk55ZH7OIjzZA3L3Snv8rqDIavas+azv2rYl1N5UXCA0lG4V96mf4u6lAUGj7eu9QTBICRSKUVUbg=="],
+    "@sudobility/subscription_lib": ["@sudobility/subscription_lib@0.0.62", "https://npm.pkg.github.com/download/@sudobility/subscription_lib/0.0.62/20957e60523e562c91bd27a6cb9d74badc96e557", { "peerDependencies": { "@sudobility/types": "^1.9.78", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-OmxrCVTsbNHsJHDRCHNRoa0XJCrYavMvDPXd3s7Cio4WCk+5al2yZWr5RvZ7vcdZvJKsKNs40DlBuYf76Fw4sw=="],
 
     "@sudobility/types": ["@sudobility/types@1.9.78", "https://npm.pkg.github.com/download/@sudobility/types/1.9.78/19ca0df5ad7d490bafc1b84384a8002f5dbc29ea", {}, "sha512-W6DYMUf7D0cVVUHDv5T8YZ339Wyay6xPx0CsdfNVgHDsm1ISDLhwacUwlM9xnvwXHGuAhP77wRVVo3uKGZe46Q=="],
 
