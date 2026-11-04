@@ -132,6 +132,11 @@ const ALLOWED: Array<{ file: string; match: RegExp; reason: string }> = [
     reason: 'viewer chrome over a photograph',
   },
   {
+    file: 'scanner/qr-scanner.tsx',
+    match: /^(hover:)?(bg|text|border)-(black|white)(\/\d+)?$/,
+    reason: 'scanner chrome over a live camera feed (theme-independent)',
+  },
+  {
     file: 'media/image-gallery.tsx',
     match: /^(hover:)?(bg|text)-(black|white)(\/\d+)?$/,
     reason: 'gallery chrome over a photograph',

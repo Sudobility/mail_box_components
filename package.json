@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/components",
-  "version": "5.3.61",
+  "version": "5.3.62",
   "description": "Reusable UI components and design system - Reorganized for better maintainability",
   "type": "module",
   "main": "dist/index.js",
@@ -157,6 +157,10 @@
     "./retail": {
       "types": "./dist/retail.d.ts",
       "import": "./dist/retail.js"
+    },
+    "./scanner": {
+      "types": "./dist/scanner.d.ts",
+      "import": "./dist/scanner.js"
     },
     "./scheduling": {
       "types": "./dist/scheduling.d.ts",
@@ -345,5 +349,8 @@
     "@revenuecat/purchases-js": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "jsqr": "^1.4.0"
   }
 }
