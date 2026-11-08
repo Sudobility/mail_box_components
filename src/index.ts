@@ -24,6 +24,8 @@ export * from './ui/animated-section';
 export * from './ui/backdrop';
 export * from './ui/banner';
 export * from './ui/button';
+export * from './ui/level-slider';
+export * from './ui/segmented-control';
 export * from './ui/command';
 export * from './ui/design-system-components';
 export * from './ui/focus-indicator';
