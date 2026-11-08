@@ -52,15 +52,15 @@ function BaseSlider({
   return (
     <div className={cn('relative h-4 flex-1', className)}>
       {/* Painted groove; the fill (for a level) shows how far the value is. */}
-      <div className="bg-border absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full" />
+      <div className='bg-border absolute inset-x-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full' />
       {filled ? (
         <div
-          className="bg-primary absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full"
+          className='bg-primary absolute left-0 top-1/2 h-1.5 -translate-y-1/2 rounded-full'
           style={{ width: `${pct}%` }}
         />
       ) : null}
       <input
-        type="range"
+        type='range'
         aria-label={label}
         value={value}
         min={min}
@@ -70,13 +70,16 @@ function BaseSlider({
         onChange={event => onChange(Number(event.target.value))}
         onPointerUp={
           onSlidingComplete
-            ? event => onSlidingComplete(Number((event.target as HTMLInputElement).value))
+            ? event =>
+                onSlidingComplete(
+                  Number((event.target as HTMLInputElement).value)
+                )
             : undefined
         }
         className={cn(
           'absolute inset-0 w-full cursor-pointer appearance-none bg-transparent',
           disabled && 'opacity-50',
-          THUMB,
+          THUMB
         )}
       />
     </div>

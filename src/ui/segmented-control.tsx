@@ -38,18 +38,21 @@ export function SegmentedControl({
 }: SegmentedControlProps) {
   return (
     <div
-      role="tablist"
+      role='tablist'
       aria-label={label}
       data-testid={testID}
-      className={cn('bg-muted inline-flex rounded-md p-0.5', containerClassName)}
+      className={cn(
+        'bg-muted inline-flex rounded-md p-0.5',
+        containerClassName
+      )}
     >
       {options.map(option => {
         const selected = option.value === value;
         return (
           <button
             key={option.value}
-            type="button"
-            role="tab"
+            type='button'
+            role='tab'
             aria-selected={selected}
             onClick={() => onChange(option.value)}
             className={cn(
@@ -57,7 +60,7 @@ export function SegmentedControl({
               selected
                 ? 'bg-primary text-primary-foreground font-medium'
                 : 'text-muted-foreground hover:text-foreground',
-              triggerClassName,
+              triggerClassName
             )}
           >
             {option.label}
