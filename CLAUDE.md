@@ -7,10 +7,13 @@
 > no feature branches.
 
 A React component library built on Radix UI primitives, styled with Tailwind and
-the centralized `@sudobility/design` tokens. Ships ES + UMD bundles with
-TypeScript declarations. Bun; React 18/19, TypeScript 5.9+, Vite 7. The React
-Native port is `@sudobility/components-rn` (repo `mail_box_components_rn`) — if a
-component exists here and not in RN, port it there rather than reimplementing.
+the centralized `@sudobility/design` tokens. Ships ES modules only (no UMD) with
+TypeScript declarations. Bun; React 19 (peer `>=18`), TypeScript 6, Vite 8,
+Vitest 4, Tailwind 4. Single npm package with 48 domain subpath exports (built
+from top-level `src/` folders via the `exports` map) — not a monorepo, no
+`packages/` dir. Published to GitHub Packages (`.npmrc` scopes `@sudobility`). The
+React Native port is `@sudobility/components-rn` (repo `mail_box_components_rn`) —
+if a component exists here and not in RN, port it there rather than reimplementing.
 
 Each component's own behavior and rationale live in its file header comment —
 read the component before changing it. This file holds only cross-cutting facts.
@@ -31,8 +34,8 @@ read the component before changing it. This file holds only cross-cutting facts.
 - **Dual-package design system.** Depends on the separate `@sudobility/design`
   package (sibling `../design_system`) for tokens, colors, typography and variant
   functions (`variants as v`, e.g. `v.button.primary.default()` → Tailwind class
-  strings). It is externalized at build time but **not** listed in the Rollup
-  externals, and resolved then.
+  strings). It is listed in the Rollup `external` array (vite.config.ts) so it is
+  not bundled; consumers provide it as a peer.
 - **Styling composition order is `cn(cvaVariants, designSystemClass, userClassName)`**
   — base, then design system, then overrides. `cn()` (`src/lib/utils.ts`) is
   clsx + tailwind-merge to resolve Tailwind conflicts; variants are defined with
@@ -49,9 +52,12 @@ read the component before changing it. This file holds only cross-cutting facts.
   consuming app whose Tailwind build scans this file — state such geometry as a
   `style`, not a class, when the component must stand alone.
 - **Theme** (`src/core/theme/`): `ThemeProvider` + `useTheme()`, `Theme.LIGHT/DARK/SYSTEM`.
-- **Build:** Vite 7 library mode, entry `src/index.ts`, outputs `dist/index.esm.js`
-  (ES) + `dist/index.umd.js` (UMD), d.ts via `vite-plugin-dts`, `@/` → `src`, all
-  peer deps externalized.
+- **Build:** `tsc && vite build && node scripts/fix-esm-imports.mjs`. Vite 8
+  library mode, ES format only (`formats: ['es']`); entries are `src/index.ts`
+  plus one per domain subpath (derived from the `exports` map in vite.config.ts),
+  output `dist/<name>.js` + `.d.ts` via `vite-plugin-dts`, `@/` → `src`, peer deps
+  externalized. `fix-esm-imports.mjs` rewrites tsc's extensionless relative
+  imports to explicit `./x.js` / `./dir/index.js` so Node's ESM loader resolves them.
 - **Testing:** Vitest + jsdom + React Testing Library, setup `src/test/setup.ts`,
   global APIs enabled, 80% coverage thresholds. Geometry-dependent behavior
   (menu placement, etc.) jsdom cannot see is checked in a consuming app's browser e2e.
@@ -65,6 +71,9 @@ read the component before changing it. This file holds only cross-cutting facts.
 `@radix-ui/react-*` primitives (dialog, alert-dialog, select, switch, tabs,
 label, slot) · `@heroicons/react` · `class-variance-authority` · `clsx` ·
 `tailwind-merge` · `react-router-dom` · `react-i18next`/`i18next` · `web-vitals`.
+Optional peers (only for the components that use them, `peerDependenciesMeta`):
+`firebase`, `@sudobility/di`, `recharts`, `@sudobility/subscription_lib`,
+`@revenuecat/purchases-js`.
 
 ## i18n
 
