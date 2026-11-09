@@ -1,422 +1,88 @@
-# mail_box_components - AI Development Guide
-
-> **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
-> Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
-> explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
-> finishing a task is not permission to commit it.
-
-## Overview
-
-A comprehensive React component library (`@sudobility/components`) providing 110+ reusable UI components built on Radix UI primitives, styled with Tailwind CSS and a centralized design system (`@sudobility/design`). The library is organized into domain-specific categories (primitives, forms, charts, media, interactive, etc.) and ships as both ES module and UMD bundles with full TypeScript declarations. Domain-specific components have been extracted into 48 specialized sub-packages under `packages/`.
-
-- **Package**: `@sudobility/components`
-- **Version**: 5.0.13
-- **License**: Public (publishConfig: `"access": "public"`)
-- **Package Manager**: **Bun** (always use `bun` instead of `npm`/`yarn`)
-- **Framework**: React 18/19, TypeScript 5.9+, Vite 7.x
-- **Module Format**: ES Module + UMD
-
-## Project Structure
-
-```
-src/
-├── index.ts                  # Main library entry point (barrel exports)
-├── lib/
-│   ├── index.ts              # Re-exports cn utility
-│   └── utils.ts              # cn() - clsx + tailwind-merge helper
-├── primitives/               # Core UI building blocks
-│   ├── feedback/             # Spinner, Alert, Badge, Toast, StatusIndicator, etc.
-│   ├── layout/               # Box, Flex, Grid, Stack, Spacer, Resizable, etc.
-│   └── typography/           # Text, Heading, Code, Kbd, Blockquote, etc.
-├── forms/                    # Comprehensive form components
-│   ├── inputs/               # Input, TextArea, Select, Checkbox, Switch, etc.
-│   ├── advanced/             # DateRangePicker, ColorPicker, WYSIWYG, Signature, etc.
-│   └── builders/             # FormBuilder, FormValidator, SurveyBuilder, etc.
-├── ui/                       # 111 generic UI components (flat directory)
-│   └── toast/                # Toast subsystem (context, container, hook)
-├── navigation/               # SmartLink, Tabs, Pagination, Stepper, TableOfContents
-├── data-display/             # DataTable, DataGrid, Avatar, StatDisplay, PivotTable
-├── charts/                   # BarChart, LineChart, PieChart, Radar, Heatmap, Gauge, etc.
-├── media/                    # Image, Video, Audio players, Gallery, QR code, etc.
-├── modals/                   # Modal, Dialog, Drawer, Sheet, Popover, Tooltip
-├── interactive/              # DragDrop, Gestures, SwipeActions, PinchZoom, etc.
-├── core/                     # Essential app-level components
-│   ├── auth/                 # ProtectedRoute
-│   ├── error/                # DetailErrorState
-│   ├── i18n-routing/         # LanguageValidator, LocalizedLink
-│   ├── icons/                # Icon exports
-│   ├── optimized/            # MemoizedComponent
-│   └── theme/                # ThemeProvider, useTheme, Theme enum
-├── features/                 # FeatureCard, FeatureGrid, CTASection
-├── kyc/                      # KYCStatusBadge, KYCLevelCard, SumsubWebSDK
-├── layout/                   # Page-level layout components
-│   ├── Footer/               # Footer (slot-based composition)
-│   ├── Layout/               # LayoutProvider, ContentContainer
-│   └── Topbar/               # Topbar (slot-based composition)
-├── optimization/             # Performance monitoring and optimization
-│   └── optimization/         # Lazy loading, preloading, API optimization
-├── dev-tools/                # Development-only tools
-│   └── PerformancePanel/     # Draggable perf panel with Web Vitals, API, Memory
-├── hooks/                    # Custom React hooks
-├── utils/                    # Utility functions (CSS, image, analytics, storage)
-├── platforms/                # Platform detection and style generation
-├── test/                     # Test setup (vitest + jsdom)
-└── __tests__/                # 29 test files
-packages/                     # 48 domain-specific sub-packages
-├── agriculture-components/
-├── analytics-components/
-├── auth-components/
-├── automotive-components/
-├── collaboration-components/
-├── communication-components/
-├── construction-components/
-├── design-components/
-├── devops-components/
-├── documents-components/
-├── ecommerce-components/
-├── education-components/
-├── email-components/
-├── energy-components/
-├── entertainment-components/
-├── entity-components/
-├── events-components/
-├── finance-components/
-├── fitness-components/
-├── food-components/
-├── gaming-components/
-├── government-components/
-├── healthcare-components/
-├── hr-components/
-├── insurance-components/
-├── interaction-components/
-├── iot-components/
-├── legal-components/
-├── logistics-components/
-├── manufacturing-components/
-├── marketing-components/
-├── media-components/
-├── monitoring-components/
-├── nonprofit-components/
-├── project-management-components/
-├── ratelimit-components/
-├── realestate-components/
-├── retail-components/
-├── scheduling-components/
-├── scientific-components/
-├── search-components/
-├── security-components/
-├── social-components/
-├── subscription-components/
-├── travel-components/
-├── visualization-components/
-├── web3-components/
-└── workflow-components/
-```
-
-## Component Categories
-
-### Primitives (`src/primitives/`)
-Core building blocks organized into three sub-groups:
-- **Layout**: Box, Flex, Grid, Stack, Center, Spacer, Container, PageContainer, AspectRatio, Divider, Separator, FloatingPanel, SplitPane, Resizable, ResizablePanels, ScrollArea, Masonry, Portal, Overlay, BorderAccent, Section
-- **Typography**: Text, Heading, PageTitle, SectionTitle, BodyText, TextLink, Code, CodeDisplay, Kbd, Blockquote, HelperText, ScreenReaderText, TruncatedText, FormattedNumber, RelativeTime
-- **Feedback**: Spinner, LoadingOverlay, LoadingDots, LoadingState, SkeletonLoader, Alert, AlertBanner, ActionBanner, FullPageSpinner, DataSkeleton, Toast, ToastNotification, NotificationBadge, NotificationPanel, Badge, BadgeDesigner, StatusBadge, StatusIndicator, StatusPipeline
-
-### Forms (`src/forms/`)
-- **Inputs**: Input, TextArea, NumberInput, SearchInput, DateInput, TimePicker, PhoneInput, Checkbox, Switch, RadioGroup, Select, MultiSelect, Combobox, EditableSelector, Dropdown, ToggleGroup, Slider, SliderInput, FileInput, TagInput, MentionInput, Label, FormField, FormFieldGroup, FormAlerts, PhoneDirectory, ActionButton, OTPInput, PasswordInput, PasswordStrength, FileBrowser, FilePreview, FileTree, FileIcon
-- **Advanced**: DateTimePicker, DateRangePicker, Calendar, TimeSlotPicker, ColorPicker, ColorPickerAdvanced, ColorSwatch, SignaturePad, SignatureRequest, WYSIWYGEditor, MarkdownRenderer, CodeHighlighter, CreditCardInput, CurrencyInput, CurrencyConverter, CurrencyRates
-- **Builders**: FormBuilder, FormValidator, FormTemplate, SchemaValidator, FieldMapper, SurveyBuilder, QuizBuilder
-
-### UI Components (`src/ui/`)
-111 generic, reusable components in a flat directory structure. Key examples: Button, Card, Modal, Dialog, Drawer, Sheet, Tabs, Select, Input, Badge, Alert, Spinner, Popover, Tooltip, Table, Breadcrumb, Pagination, Progress, Checkbox, Switch, SkeletonLoader, InfiniteScroll, VirtualList, TreeView, TransferList, MasonryGrid, Confetti, TimerDisplay, VersionBadge, SkipNavigation, FocusIndicator, FocusTrap, ParallaxScroll, RevealOnScroll, MorphTransition, and more.
-
-### Navigation (`src/navigation/`)
-SmartLink, Link, ExternalLink, PreloadLink, BreadcrumbNav, Tabs, NavigationMenu, NavigationList, SideNav, Pagination, PaginationNav, Stepper, StepperNav, TableOfContents
-
-### Data Display (`src/data-display/`)
-Table, DataTable, DataGrid, PivotTable, SpreadsheetGrid, ColumnResize, CellEditor, List, VirtualList, TreeView, TransferList, Card, DashboardStatCard, Avatar, AvatarGroup, ProfileHeader, KeyValuePair, StatDisplay, EmptyState, NoContent, UserTable, TableReservation, ListingForm
-
-### Charts (`src/charts/`)
-BarChart, LineChart, PieChart, AreaChart, RadarChart, BubbleChart, ScatterPlot, TreeMap, SankeyDiagram, Sparkline, Heatmap, FunnelChart, BurndownChart, PerformanceChart, MetricComparison, Gauge, Progress, ProgressCircle, ProgressTracker
-
-### Media (`src/media/`)
-Image, ImageGallery, ImageComparison, ImageCropper, Lightbox, RetinaImage, VideoPlayer, VideoThumbnail, VideoEditor, VideoCall, LiveStream, AudioPlayer, AudioWaveform, WaveForm, VoiceRecorder, PodcastPlayer, MediaUploader, MediaPlaylist, PlaylistManager, QRCodeDisplay
-
-### Modals & Overlays (`src/modals/`)
-Modal, Dialog, ConfirmationDialog, TextInputModal, Drawer, Sheet, Popover, HoverCard, Tooltip
-
-### Interactive (`src/interactive/`)
-DragDrop, DragDropList, SortableGrid, NestedDrag, GestureDetector, SwipeActions, PinchZoom, DoubleTap, LongPress, RadialMenu, FocusTrap, ScrollSpy, PullToRefresh, InfiniteScroll
-
-### Core (`src/core/`)
-Breadcrumb, BreadcrumbSection, CodeBlock, CollapsibleDocumentationTopic, PromotionalBanner, TrackedButton, TrackedLink, LanguageSelector, StepList, ErrorBoundary, ErrorBoundaryLazy, SafeAppWrapper, SecurityProvider, OptimizedImage, MemoizedComponent, ThemeProvider/useTheme, ProtectedRoute, DetailErrorState, LanguageValidator, LocalizedLink
-
-### Features (`src/features/`)
-FeatureCard, FeatureGrid, CTASection
-
-### KYC (`src/kyc/`)
-KYCStatusBadge, KYCLevelCard, SumsubWebSDK
-
-### Layout (`src/layout/`)
-StandardPageLayout, PageHeader, MasterDetailLayout, MasterListItem, ScreenContainer, AspectFitView, LayoutProvider/ContentContainer, Footer (slot-based: FooterGrid, FooterBrand, FooterLinkSection, FooterBottom, etc.), Topbar (slot-based: TopbarLogo, TopbarNav, TopbarActions, TopbarMenuToggle, etc.)
-
-### Optimization (`src/optimization/`)
-PerformanceOptimizer, LoadingOptimizer, OptimizedRoutePreloader, CriticalPathOptimizer, performance monitoring (getPerformanceMonitor, initializePerformanceMonitoring), Web Vitals integration, advanced lazy loading, API optimization, environment detection, route preloading, security headers
-
-### Dev Tools (`src/dev-tools/`)
-PerformancePanel - draggable dev overlay with sections for Web Vitals, API metrics, bundle metrics, memory, and custom metrics
-
-### Hooks (`src/hooks/`)
-useClickOutside, useCodeLoader, useCopyToClipboard, useMultipleCopyToClipboard, useFormSubmission, useFormValidation, useToggle, useLocalizedNavigate, useRoutePerformance
-
-### Utilities (`src/utils/`)
-cn (clsx + tailwind-merge), formatFileSize/convertFileSize/parseFileSize, CSS optimization, image optimization, tree shaking helpers, lazy loading, navigation helpers, storage utilities, wallet/browser detection, error utilities, analytics utilities
-
-### Platforms (`src/platforms/`)
-WebStyleGenerator - converts design system data to Tailwind CSS classes for web components, with helpers for color, spacing, border radius, typography, and animation conversion.
-
-## Development Commands
-
-```bash
-# Install dependencies
-bun install
-
-# Build the library (TypeScript + Vite)
-bun run build
-
-# Development mode with file watching
-bun run dev
-
-# Type checking only (no emit)
-bun run type-check
-
-# Linting (ESLint with TypeScript + Prettier)
-bun run lint
-
-# Formatting
-bun run format
-bun run format:check
-
-# Run all tests (Vitest)
-bun test
-
-# Test with UI
-bun run test:ui
-
-# Run a single test file
-bun test -- src/__tests__/button.test.tsx
-
-# Pre-publish build
-bun run prepublishOnly
-```
-
-## Architecture & Patterns
-
-### Dual-Package Design System
-This library depends on the separate `@sudobility/design` package (`../design_system`) for design tokens, colors, typography, and component variant definitions. The design system provides:
-- **Variant functions** (`variants as v`): e.g. `v.button.primary.default()` returns Tailwind class strings
-- **Design tokens**: Spacing (4px grid), typography scales, animation tokens
-- **Color palette**: HSL CSS custom properties with dark mode support
-
-### Component Styling Strategy
-1. **`cn()` utility** (`src/lib/utils.ts`): Merges class names via `clsx` + `tailwind-merge` to handle Tailwind class conflicts
-2. **`class-variance-authority` (CVA)**: Defines component variants with `cva()` for type-safe variant props
-3. **Design system classes**: Applied from `@sudobility/design` variant functions
-4. **Composition order**: `cn(cvaVariants, designSystemClass, userClassName)` -- base, then design system, then overrides
-
-### Radix UI Primitives
-Components use Radix UI for accessible, unstyled primitives:
-- `@radix-ui/react-dialog` -- Modal, Dialog
-- `@radix-ui/react-alert-dialog` -- ConfirmationDialog
-- `@radix-ui/react-select` -- Select
-- `@radix-ui/react-switch` -- Switch
-- `@radix-ui/react-tabs` -- Tabs
-- `@radix-ui/react-label` -- Label
-- `@radix-ui/react-slot` -- Polymorphic `asChild` pattern (Button, etc.)
-
-### Tailwind CSS Configuration
-- Dark mode via `class` strategy (`darkMode: ["class"]`)
-- HSL CSS custom property theming (`hsl(var(--primary))`, `hsl(var(--background))`, etc.)
-- Container centered with 2rem padding, max 1400px
-- Custom keyframes for accordion animations
-
-### Theme System (`src/core/theme/`)
-- `ThemeProvider` wraps the app, provides `useTheme()` hook
-- Supports `Theme.LIGHT`, `Theme.DARK`, `Theme.SYSTEM`
-- Configurable `FontSize` settings
-
-### Slot-Based Layout Composition
-Layout components (Footer, Topbar) use a slot pattern:
-```tsx
-<Footer>
-  <FooterGrid>
-    <FooterBrand />
-    <FooterLinkSection />
-  </FooterGrid>
-  <FooterBottom>
-    <FooterCopyright />
-  </FooterBottom>
-</Footer>
-```
-
-### i18n Support
-- `react-i18next` and `i18next` as peer dependencies
-- `useLocalizedNavigate` hook for language-prefixed routing
-- `LanguageValidator`, `LocalizedLink` components in `src/core/i18n-routing/`
-
-### Build Configuration
-- **Vite 7** library mode with `@vitejs/plugin-react`
-- Entry: `src/index.ts`
-- Output: `dist/index.esm.js` (ES) and `dist/index.umd.js` (UMD)
-- TypeScript declarations via `vite-plugin-dts`
-- Path alias: `@/` maps to `src/`
-- All peer dependencies externalized in Rollup config
-- `@sudobility/design` externalized but NOT listed in rollupOptions externals (resolved at build time)
-
-### Testing Architecture
-- **Vitest** with jsdom environment and React Testing Library
-- 29 test files in `src/__tests__/`
-- Setup file: `src/test/setup.ts`
-- Coverage thresholds: 80% for branches, functions, lines, statements
-- Global test APIs enabled (`describe`, `it`, `expect` without imports)
-
-### ESLint Configuration
-- Flat config (`eslint.config.js`) with `@typescript-eslint`, `react-hooks`, `react-refresh`, `prettier`
-- Unused vars with `^_` ignore pattern
-- `no-console` warning (allows `warn`/`error`)
-- Prettier integration enforced as errors
-
-## Common Tasks
-
-### Adding a New Component
-
-1. **Create the component file** in the appropriate directory:
-   - Generic UI component: `src/ui/my-component.tsx`
-   - Primitive (layout/typography/feedback): `src/primitives/<subcategory>/my-component.tsx`
-   - Form input: `src/forms/inputs/my-component.tsx` or `src/forms/advanced/my-component.tsx`
-   - Data display: `src/data-display/my-component.tsx`
-   - Other category: the matching `src/<category>/my-component.tsx`
-
-2. **Follow the component pattern** (forwardRef + cn + CVA):
-   ```tsx
-   import * as React from 'react';
-   import { cva, type VariantProps } from 'class-variance-authority';
-   import { cn } from '../lib/utils';
-
-   const myComponentVariants = cva('base-classes', {
-     variants: { variant: { default: '', primary: '' } },
-     defaultVariants: { variant: 'default' },
-   });
-
-   export interface MyComponentProps
-     extends React.HTMLAttributes<HTMLDivElement>,
-       VariantProps<typeof myComponentVariants> {}
-
-   const MyComponent = React.forwardRef<HTMLDivElement, MyComponentProps>(
-     ({ className, variant, ...props }, ref) => (
-       <div
-         ref={ref}
-         className={cn(myComponentVariants({ variant }), className)}
-         {...props}
-       />
-     )
-   );
-   MyComponent.displayName = 'MyComponent';
-
-   export { MyComponent, myComponentVariants };
-   ```
-
-3. **Export from the category index** (e.g., `src/ui/index.ts`, `src/primitives/feedback/index.ts`)
-
-4. **Verify it reaches the main barrel** -- ensure the category index is re-exported from `src/index.ts`
-
-5. **Add tests** in `src/__tests__/my-component.test.tsx`:
-   ```tsx
-   import { render, screen } from '@testing-library/react';
-   import { MyComponent } from '../ui/my-component';
-
-   describe('MyComponent', () => {
-     it('renders correctly', () => {
-       render(<MyComponent>Hello</MyComponent>);
-       expect(screen.getByText('Hello')).toBeInTheDocument();
-     });
-   });
-   ```
-
-6. **Run checks**: `bun run type-check && bun run lint && bun test`
-
-### Using the Design System
-```tsx
-import { cn } from '../lib/utils';
-import { variants as v } from '@sudobility/design';
-
-// Apply design system variant classes
-const classes = cn(v.button.primary.default(), 'additional-tailwind-classes');
-```
-
-### Working with Radix UI
-```tsx
-import * as SwitchPrimitive from '@radix-ui/react-switch';
-
-// Wrap Radix primitives with Tailwind styling and cn()
-const Switch = React.forwardRef<...>(({ className, ...props }, ref) => (
-  <SwitchPrimitive.Root className={cn('base-classes', className)} ref={ref} {...props}>
-    <SwitchPrimitive.Thumb className={cn('thumb-classes')} />
-  </SwitchPrimitive.Root>
-));
-```
-
-## Peer & Key Dependencies
-
-### Peer Dependencies (required by consumers)
-| Package | Version |
-|---------|---------|
-| `react` / `react-dom` | >= 18.0.0 |
-| `@sudobility/design` | ^1.1.19 |
-| `@sudobility/types` | ^1.9.53 |
-| `@radix-ui/react-dialog` | >= 1.0.0 |
-| `@radix-ui/react-alert-dialog` | >= 1.0.0 |
-| `@radix-ui/react-select` | >= 2.0.0 |
-| `@radix-ui/react-switch` | >= 1.0.0 |
-| `@radix-ui/react-tabs` | >= 1.0.0 |
-| `@radix-ui/react-label` | >= 2.0.0 |
-| `@radix-ui/react-slot` | >= 1.0.0 |
-| `@heroicons/react` | >= 2.0.0 |
-| `class-variance-authority` | >= 0.7.0 |
-| `clsx` | >= 2.0.0 |
-| `tailwind-merge` | >= 2.0.0 |
-| `react-router-dom` | >= 6.0.0 |
-| `react-i18next` / `i18next` | >= 14.0.0 / >= 23.0.0 |
-| `web-vitals` | >= 3.0.0 |
-
-### Key Dev Dependencies
-| Package | Purpose |
-|---------|---------|
-| `vite` 7.x | Library bundling |
-| `typescript` 5.9+ | Type checking and declarations |
-| `vitest` 3.x | Test runner |
-| `@testing-library/react` 16.x | Component testing |
-| `tailwindcss` 4.x | Utility-first CSS |
-| `eslint` 9.x | Linting (flat config) |
-| `prettier` 3.x | Code formatting |
-| `vite-plugin-dts` | TypeScript declaration generation |
-
-### Sub-Packages (48 domain-specific packages in `packages/`)
-Each sub-package is independently versioned and publishable. They include:
-agriculture, analytics, auth, automotive, collaboration, communication, construction, design, devops, documents, ecommerce, education, email, energy, entertainment, entity, events, finance, fitness, food, gaming, government, healthcare, hr, insurance, interaction, iot, legal, logistics, manufacturing, marketing, media, monitoring, nonprofit, project-management, ratelimit, realestate, retail, scheduling, scientific, search, security, social, subscription, travel, visualization, web3, workflow
-
-### Related Packages (separate repos)
-The React Native port of this library is `@sudobility/components-rn` in the `mail_box_components_rn` directory.
-
-## Git Workflow
-
-- Do not use feature branches for code changes. Always stay on the current branch.
-
-## Select: which way the menu opens
-
-`SelectContent` (`src/ui/select.tsx`) opens below its trigger unless there is not room there and there is more above (`chooseMenuSide`), and is never taller than the room on the side it opened on (`max-height: min(24rem, var(--radix-select-content-available-height))`, as a style: an arbitrary-value class exists only in an app whose Tailwind build scans this file). Three things were wrong before, all needed for a menu at the bottom of a window to work:
-
-- The side was chosen in an effect with no dependencies, which ran once when the CLOSED select mounted, found no content element and never ran again. It is chosen in the content's ref callback now, which runs on every opening.
-- `variants.overlays.dropdown.menu()` makes the menu `absolute`, so Radix's positioning wrapper around it had no height: placed above the trigger, the menu still hung down from it. The menu is `relative` here.
-- Nothing capped the height to the room available, so a long list ran off the window on either side.
-
-Where the menu ends up is decided from real geometry, which jsdom does not have: `screenwriter_app`'s `e2e/catalog-extras.e2e.ts` checks it in a browser.
+# mail_box_components (@sudobility/components)
+
+> **Git: never auto-commit or auto-push.** Leave work in the working tree; run
+> `git commit`/`push`/`gh pr create`/`scripts/push_all.sh` only when the user asks
+> in that turn. Approval for an earlier change does not carry forward, and
+> finishing a task is not permission to commit it. Stay on the current branch —
+> no feature branches.
+
+A React component library built on Radix UI primitives, styled with Tailwind and
+the centralized `@sudobility/design` tokens. Ships ES + UMD bundles with
+TypeScript declarations. Bun; React 18/19, TypeScript 5.9+, Vite 7. The React
+Native port is `@sudobility/components-rn` (repo `mail_box_components_rn`) — if a
+component exists here and not in RN, port it there rather than reimplementing.
+
+Each component's own behavior and rationale live in its file header comment —
+read the component before changing it. This file holds only cross-cutting facts.
+
+## Commands
+
+- `bun install` — dependencies
+- `bun run build` — `tsc && vite build && scripts/fix-esm-imports.mjs`
+- `bun run dev` — vite build --watch
+- `bun run type-check` — `tsc --noEmit`
+- `bun run lint` — ESLint flat config, `--max-warnings 0`
+- `bun run format` / `format:check` — prettier
+- `bun run test:unit` — vitest run (single file: `bun run test:unit src/__tests__/button.test.tsx`)
+- `bun run test:ui` — vitest UI
+
+## Architecture & load-bearing facts
+
+- **Dual-package design system.** Depends on the separate `@sudobility/design`
+  package (sibling `../design_system`) for tokens, colors, typography and variant
+  functions (`variants as v`, e.g. `v.button.primary.default()` → Tailwind class
+  strings). It is externalized at build time but **not** listed in the Rollup
+  externals, and resolved then.
+- **Styling composition order is `cn(cvaVariants, designSystemClass, userClassName)`**
+  — base, then design system, then overrides. `cn()` (`src/lib/utils.ts`) is
+  clsx + tailwind-merge to resolve Tailwind conflicts; variants are defined with
+  `class-variance-authority` (CVA); design classes come from `@sudobility/design`.
+- **Component pattern:** `forwardRef` + `cn` + CVA, `displayName` set, exported
+  from the component file *and* from its category `index.ts`. **A new component is
+  invisible until its category index reaches the main barrel** `src/index.ts` —
+  verify both hops.
+- **Radix UI** supplies accessible unstyled primitives (dialog, alert-dialog,
+  select, switch, tabs, label, slot for the polymorphic `asChild`); wrap them with
+  Tailwind + `cn()`.
+- **Tailwind:** dark mode via the `class` strategy; HSL CSS-custom-property
+  theming (`hsl(var(--primary))`, …). An arbitrary-value class only exists in a
+  consuming app whose Tailwind build scans this file — state such geometry as a
+  `style`, not a class, when the component must stand alone.
+- **Theme** (`src/core/theme/`): `ThemeProvider` + `useTheme()`, `Theme.LIGHT/DARK/SYSTEM`.
+- **Build:** Vite 7 library mode, entry `src/index.ts`, outputs `dist/index.esm.js`
+  (ES) + `dist/index.umd.js` (UMD), d.ts via `vite-plugin-dts`, `@/` → `src`, all
+  peer deps externalized.
+- **Testing:** Vitest + jsdom + React Testing Library, setup `src/test/setup.ts`,
+  global APIs enabled, 80% coverage thresholds. Geometry-dependent behavior
+  (menu placement, etc.) jsdom cannot see is checked in a consuming app's browser e2e.
+- **ESLint** flat config (`eslint.config.js`): `@typescript-eslint`, react-hooks,
+  react-refresh, prettier-as-error; unused vars ignore `^_`; `no-console` warn
+  (allows `warn`/`error`).
+
+## Peer dependencies (required by consumers)
+
+`react`/`react-dom` ≥18 · `@sudobility/design` · `@sudobility/types` · the
+`@radix-ui/react-*` primitives (dialog, alert-dialog, select, switch, tabs,
+label, slot) · `@heroicons/react` · `class-variance-authority` · `clsx` ·
+`tailwind-merge` · `react-router-dom` · `react-i18next`/`i18next` · `web-vitals`.
+
+## i18n
+
+`react-i18next`/`i18next` are peers; `useLocalizedNavigate` does language-prefixed
+routing; `LanguageValidator`/`LocalizedLink` live in `src/core/i18n-routing/`.
+
+## Structure
+
+`src/` groups components by domain; put a new one in the matching category and
+export it up the barrel chain:
+
+- `primitives/` — `layout/`, `typography/`, `feedback/` building blocks
+- `forms/` — `inputs/`, `advanced/`, `builders/`
+- `ui/` — generic flat components (Button, Card, Modal, Tabs, Select, …) + `toast/`
+- `navigation/`, `data-display/`, `charts/`, `media/`, `modals/`, `interactive/`
+- `core/` — app-level (`auth/`, `error/`, `i18n-routing/`, `icons/`, `theme/`, …)
+- `layout/` — page-level (slot-based `Footer`/`Topbar`, `MasterDetailLayout`, …)
+- `features/`, `kyc/`, plus domain folders (`finance/`, `healthcare/`, …)
+- `optimization/`, `dev-tools/` (`PerformancePanel`), `hooks/`, `utils/`
+- `platforms/` — `WebStyleGenerator` turns design-system data into Tailwind classes
+- `lib/` — `cn()` · `test/` — vitest setup · `__tests__/`
