@@ -21,7 +21,7 @@
         "@sudobility/design": "^1.1.71",
         "@sudobility/di": "^1.5.86",
         "@sudobility/subscription_lib": "^0.0.66",
-        "@sudobility/types": "^1.9.79",
+        "@sudobility/types": "^1.10.1",
         "@testing-library/dom": "~10.4.2",
         "@testing-library/jest-dom": "~7.0.1",
         "@testing-library/react": "~16.3.3",
@@ -78,7 +78,7 @@
         "@sudobility/design": "^1.1.71",
         "@sudobility/di": "^1.5.86",
         "@sudobility/subscription_lib": "^0.0.66",
-        "@sudobility/types": "^1.9.79",
+        "@sudobility/types": "^1.10.1",
         "class-variance-authority": ">=0.7.0",
         "clsx": ">=2.0.0",
         "firebase": "^12.0.0",
@@ -501,7 +501,7 @@
 
     "@sudobility/subscription_lib": ["@sudobility/subscription_lib@0.0.66", "https://npm.pkg.github.com/download/@sudobility/subscription_lib/0.0.66/a427b75606c825bd360fb1e534c7e11404df324b", { "peerDependencies": { "@sudobility/di": "^1.5.86", "@sudobility/types": "^1.9.79", "@tanstack/react-query": "^5.0.0", "react": "^18.0.0 || ^19.0.0" } }, "sha512-JgN8+qCtWgFXdK0Vhlcztwrbi0Q21biJF3naPgSO7m4/qhb/C1rJUgqX4m1RRMheRQzGyJwIaF63rRX0vTS3+g=="],
 
-    "@sudobility/types": ["@sudobility/types@1.9.79", "https://npm.pkg.github.com/download/@sudobility/types/1.9.79/59975e39d6ab7e215418a489ef3cfe214b7521f4", {}, "sha512-rRtDT++fVy+I1m6E31fq752lxCQytFzwfqpJe5wDMPLcC1rJOBa7v+4+5e3cmX8VV1CsuLg8PTLMFe6A7AELRQ=="],
+    "@sudobility/types": ["@sudobility/types@1.10.1", "https://npm.pkg.github.com/download/@sudobility/types/1.10.1/8e353f55822e0bc3fa9555dfe3aee593e140c012", {}, "sha512-LmJyjDDY5rHDET1wstkT0i59SSOrOXijL2iqrgfcK6VHtKcBEw7FFpbw4CyHn+dhR9kqkYpEydSfypoqw7crMg=="],
 
     "@tanstack/query-core": ["@tanstack/query-core@5.105.1", "", {}, "sha512-B/rNlZoZ54w1dlddiUt9oEe1SLM+37c00SKLJEg9YH+7as3Y54P81o9Fh+2ujZ36tXPnQJ5oVe7AcyEWkyFhPg=="],
 
