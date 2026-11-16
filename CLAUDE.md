@@ -72,8 +72,10 @@ read the component before changing it. This file holds only cross-cutting facts.
 label, slot) · `@heroicons/react` · `class-variance-authority` · `clsx` ·
 `tailwind-merge` · `react-router-dom` · `react-i18next`/`i18next` · `web-vitals`.
 Optional peers (only for the components that use them, `peerDependenciesMeta`):
-`firebase`, `@sudobility/di`, `recharts`, `@sudobility/subscription_lib`,
-`@revenuecat/purchases-js`.
+`firebase`, `@sudobility/di`, `recharts`, `@revenuecat/purchases-js`. The
+`subscription/` provider is self-contained (mirrors the RN port) and does **not**
+depend on `@sudobility/subscription_lib`; the real RevenueCat wiring lives in the
+consuming pages layer (`subscription_pages`).
 
 ## i18n
 

@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/components",
-  "version": "5.3.74",
+  "version": "5.3.75",
   "description": "Reusable UI components and design system - Reorganized for better maintainability",
   "type": "module",
   "main": "dist/index.js",
@@ -260,7 +260,6 @@
     "firebase": "^12.0.0",
     "@sudobility/di": "^1.5.91",
     "recharts": "^3.0.0",
-    "@sudobility/subscription_lib": "^0.0.71",
     "@revenuecat/purchases-js": "^1.0.0"
   },
   "devDependencies": {
@@ -314,7 +313,6 @@
     "firebase": "^12.0.0",
     "@sudobility/di": "^1.5.91",
     "recharts": "^3.0.0",
-    "@sudobility/subscription_lib": "^0.0.71",
     "@revenuecat/purchases-js": "^1.0.0"
   },
   "repository": {
@@ -341,9 +339,6 @@
       "optional": true
     },
     "recharts": {
-      "optional": true
-    },
-    "@sudobility/subscription_lib": {
       "optional": true
     },
     "@revenuecat/purchases-js": {

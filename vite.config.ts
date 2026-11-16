@@ -49,7 +49,6 @@ export default defineConfig({
         // Deps pulled in by folded-in modules — external so consumers provide
         // them (and so their RN/Flow transitive code isn't parsed/bundled).
         '@sudobility/di',
-        '@sudobility/subscription_lib',
         '@revenuecat/purchases-js',
         'recharts',
         /^firebase(\/.*)?$/,

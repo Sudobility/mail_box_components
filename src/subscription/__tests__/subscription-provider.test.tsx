@@ -1,43 +1,43 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   SubscriptionProvider,
   useSubscriptionContext,
   clearRevenueCatCheckoutSessions,
 } from '../subscription-provider';
 
-// Mock subscription_lib
-vi.mock('@sudobility/subscription_lib', () => ({
-  isSubscriptionInitialized: vi.fn(() => false),
-  getSubscriptionInstance: vi.fn(),
-  refreshSubscription: vi.fn(),
-  restoreSubscription: vi.fn(),
-  onSubscriptionRefresh: vi.fn(() => vi.fn()),
-}));
-
-// Test component that uses the context
+// Helper component that exposes context values for testing
 const TestConsumer: React.FC = () => {
-  const { products, currentSubscription, isLoading, error } =
-    useSubscriptionContext();
-
+  const ctx = useSubscriptionContext();
   return (
     <div>
-      <div data-testid='loading'>{isLoading ? 'Loading' : 'Ready'}</div>
-      <div data-testid='error'>{error || 'No error'}</div>
-      <div data-testid='products'>{products.length} products</div>
+      <div data-testid='loading'>{ctx.isLoading ? 'true' : 'false'}</div>
+      <div data-testid='error'>{ctx.error ?? 'none'}</div>
+      <div data-testid='products'>{ctx.products.length} products</div>
       <div data-testid='subscription'>
-        {currentSubscription?.isActive ? 'Active' : 'Inactive'}
+        {ctx.currentSubscription?.isActive ? 'active' : 'none'}
       </div>
+      <button data-testid='initialize' onClick={() => ctx.initialize()} />
+      <button
+        data-testid='purchase'
+        onClick={() => ctx.purchase('test_product')}
+      />
+      <button data-testid='restore' onClick={() => ctx.restore()} />
+      <button data-testid='clearError' onClick={() => ctx.clearError()} />
     </div>
   );
 };
 
 describe('SubscriptionProvider', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.useFakeTimers();
     localStorage.clear();
     sessionStorage.clear();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
   });
 
   it('renders children', () => {
@@ -50,17 +50,17 @@ describe('SubscriptionProvider', () => {
     expect(screen.getByTestId('child')).toBeInTheDocument();
   });
 
-  it('provides context to children', () => {
+  it('provides initial state with no loading, no error, no subscription', () => {
     render(
       <SubscriptionProvider apiKey=''>
         <TestConsumer />
       </SubscriptionProvider>
     );
 
-    expect(screen.getByTestId('loading')).toHaveTextContent('Ready');
-    expect(screen.getByTestId('error')).toHaveTextContent('No error');
+    expect(screen.getByTestId('loading')).toHaveTextContent('false');
+    expect(screen.getByTestId('error')).toHaveTextContent('none');
     expect(screen.getByTestId('products')).toHaveTextContent('0 products');
-    expect(screen.getByTestId('subscription')).toHaveTextContent('Inactive');
+    expect(screen.getByTestId('subscription')).toHaveTextContent('none');
   });
 
   it('throws error when useSubscriptionContext is used outside provider', () => {
@@ -73,6 +73,114 @@ describe('SubscriptionProvider', () => {
     );
 
     consoleSpy.mockRestore();
+  });
+
+  it('initializes in development mode (no real API key)', async () => {
+    const onError = vi.fn();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <SubscriptionProvider apiKey='' onError={onError}>
+        <TestConsumer />
+      </SubscriptionProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('initialize'));
+    });
+
+    expect(screen.getByTestId('loading')).toHaveTextContent('false');
+    expect(screen.getByTestId('error')).toHaveTextContent('none');
+    expect(onError).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
+  it('purchase flow sets active subscription in dev mode', async () => {
+    const onPurchaseSuccess = vi.fn();
+    render(
+      <SubscriptionProvider apiKey='' onPurchaseSuccess={onPurchaseSuccess}>
+        <TestConsumer />
+      </SubscriptionProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('purchase'));
+    });
+
+    // Advance past the 2000ms simulated delay
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2100);
+    });
+
+    expect(screen.getByTestId('subscription')).toHaveTextContent('active');
+    expect(onPurchaseSuccess).toHaveBeenCalledWith('test_product');
+  });
+
+  it('restore flow sets error "No previous purchases found" in dev mode', async () => {
+    render(
+      <SubscriptionProvider apiKey=''>
+        <TestConsumer />
+      </SubscriptionProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('restore'));
+    });
+
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1100);
+    });
+
+    expect(screen.getByTestId('error')).toHaveTextContent(
+      'No previous purchases found'
+    );
+  });
+
+  it('clearError resets error to null', async () => {
+    render(
+      <SubscriptionProvider apiKey=''>
+        <TestConsumer />
+      </SubscriptionProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('restore'));
+    });
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(1100);
+    });
+
+    expect(screen.getByTestId('error')).toHaveTextContent(
+      'No previous purchases found'
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('clearError'));
+    });
+
+    expect(screen.getByTestId('error')).toHaveTextContent('none');
+  });
+
+  it('initialize only runs once (idempotent)', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    render(
+      <SubscriptionProvider apiKey=''>
+        <TestConsumer />
+      </SubscriptionProvider>
+    );
+
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('initialize'));
+    });
+
+    warn.mockClear();
+
+    // Second call should be a no-op (isInitialized is true)
+    await act(async () => {
+      fireEvent.click(screen.getByTestId('initialize'));
+    });
+
+    expect(warn).not.toHaveBeenCalled();
+    warn.mockRestore();
   });
 });
 
