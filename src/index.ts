@@ -22,6 +22,8 @@ export * from './ui/app-links';
 export * from './ui/address-link';
 export * from './ui/animated-section';
 export * from './ui/backdrop';
+export * from './ui/fade-in-image';
+export * from './ui/lazy-flat-list';
 export * from './ui/banner';
 export * from './ui/button';
 export * from './ui/level-slider';
