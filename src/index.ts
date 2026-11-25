@@ -52,6 +52,7 @@ export * from './ui/settings-list';
 export * from './ui/skip-navigation';
 export * from './ui/select';
 export * from './ui/sort-dropdown';
+export * from './ui/tooltip';
 export * from './ui/version-badge';
 export * from './ui/visually-hidden';
 export * from './ui/text-input-modal';
